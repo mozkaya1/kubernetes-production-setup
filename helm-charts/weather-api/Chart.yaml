@@ -1,0 +1,6 @@
+apiVersion: v2
+name: weather-api
+description: A Helm chart for Weather API Go application
+type: application
+version: 1.0.0
+appVersion: "1.0.0"

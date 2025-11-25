@@ -1,0 +1,8 @@
+# Kubernetes
+*.tmp
+*.bak
+
+# Sensitive data
+*secret*
+*password*
+*credential*

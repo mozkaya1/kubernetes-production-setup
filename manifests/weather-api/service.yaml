@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["musti-apps/weather-api"]'
+    management.cattle.io/ui-managed: "true"
+  name: weather-api
+  namespace: musti-apps
+spec:
+  clusterIP: 10.43.129.68
+  clusterIPs:
+  - 10.43.129.68
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: musti-api
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-musti-apps-weather-api
+  sessionAffinity: None
+  type: ClusterIP

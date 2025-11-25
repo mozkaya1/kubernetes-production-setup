@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/publicEndpoints: '[{"port":30000,"protocol":"TCP","serviceName":"musti-apps:musti-deployment-nodeport","allNodes":true}]'
+    field.cattle.io/targetWorkloadIds: '["musti-apps/musti-deployment"]'
+    management.cattle.io/ui-managed: "true"
+  name: musti-deployment-nodeport
+  namespace: musti-apps
+spec:
+  clusterIP: 10.43.198.61
+  clusterIPs:
+  - 10.43.198.61
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: musti-nodeport
+    nodePort: 30000
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-musti-apps-musti-deployment
+  sessionAffinity: None
+  type: NodePort
