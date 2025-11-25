@@ -1,4 +1,4 @@
-# Kubernetes Cluster Production Setup
+# Kubernetes Cluster Production Setup.
 
 This repository contains production-ready Kubernetes configurations for a multi-application environment running on Rancher.
 
@@ -24,6 +24,10 @@ This repository contains production-ready Kubernetes configurations for a multi-
 ### 4. Database Layer
 - **MariaDB:** Relational database with dedicated service
 
+### 5. Monitoring 
+- **Prometheus** -- Data pollution
+- **Grafana** -- Graphs 
+
 ## Architecture
 
 Load Balancer (Traefik)
@@ -32,7 +36,7 @@ Load Balancer (Traefik)
 - └── Weather API (port 30002)
 - └── MariaDB Database
 
-## 🔧 Technical Stack
+##  Technical Stack
 
 - **Orchestration:** Kubernetes v1.28+
 - **Management:** Rancher 2.9.3
@@ -57,4 +61,15 @@ kubectl apply -f manifests/
 # Or use Helm charts
 helm install meira-accessory ./helm-charts/web-app
 helm install weather-api ./helm-charts/go-api-app
+
+# Monitoring -- Docker Compose
+cd ./manifests/monitoring/
+docker-compose up 
+
 ```
+
+## Rancher 
+![Rancher](./rancher.png)
+
+## Monitoring - Grafana
+![grafana](./monitoring.png) 
