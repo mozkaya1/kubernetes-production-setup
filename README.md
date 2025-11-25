@@ -25,7 +25,7 @@ This repository contains production-ready Kubernetes configurations for a multi-
 - **MariaDB:** Relational database with dedicated service
 
 ### 5. Monitoring 
-- **Prometheus** -- Data pollution
+- **Prometheus** -- Data collecting
 - **Grafana** -- Graphs 
 
 ## Architecture
