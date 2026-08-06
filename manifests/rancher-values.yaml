@@ -1,0 +1,11 @@
+USER-SUPPLIED VALUES:
+bootstrapPassword: password
+hostname: rancher.musti.uk
+tls: external
+resources:
+  requests:
+    cpu: 500m
+    memory: 512Mi
+  limits:
+    cpu: 1000m
+    memory: 1024Mi

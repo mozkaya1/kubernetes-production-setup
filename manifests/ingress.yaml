@@ -1,0 +1,120 @@
+apiVersion: v1
+items:
+- apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    annotations:
+      field.cattle.io/publicEndpoints: '[{"addresses":["192.168.50.100"],"port":80,"protocol":"HTTP","serviceName":"musti-apps:musti-deployment","ingressName":"musti-apps:drulkuozkaya","hostname":"*.drulkuozkaya.com","path":"/","allNodes":false}]'
+    creationTimestamp: "2024-10-28T22:32:50Z"
+    generation: 2
+    name: drulkuozkaya
+    namespace: musti-apps
+    resourceVersion: "182919602"
+    uid: fc83f962-a4d7-4c67-b64e-a04c275cd139
+  spec:
+    ingressClassName: traefik
+    rules:
+    - host: '*.drulkuozkaya.com'
+      http:
+        paths:
+        - backend:
+            service:
+              name: musti-deployment
+              port:
+                number: 80
+          path: /
+          pathType: Prefix
+  status:
+    loadBalancer:
+      ingress:
+      - ip: 192.168.50.100
+- apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    annotations:
+      field.cattle.io/publicEndpoints: '[{"addresses":["192.168.50.100"],"port":80,"protocol":"HTTP","serviceName":"musti-apps:meiraaccessories","ingressName":"musti-apps:meira","hostname":"*.meiraaccessories.com","path":"/","allNodes":false}]'
+    creationTimestamp: "2024-11-03T23:01:49Z"
+    generation: 1
+    name: meira
+    namespace: musti-apps
+    resourceVersion: "182919606"
+    uid: 0a3ebb28-a96d-444b-bb0d-20e28799dfa8
+  spec:
+    ingressClassName: traefik
+    rules:
+    - host: '*.meiraaccessories.com'
+      http:
+        paths:
+        - backend:
+            service:
+              name: meiraaccessories
+              port:
+                number: 80
+          path: /
+          pathType: Prefix
+  status:
+    loadBalancer:
+      ingress:
+      - ip: 192.168.50.100
+- apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    annotations:
+      field.cattle.io/publicEndpoints: '[{"addresses":["192.168.50.100"],"port":80,"protocol":"HTTP","serviceName":"musti-apps:opencloud-external-service","ingressName":"musti-apps:opencloud-ingress-m07.eu","hostname":"cloud.m07.eu","path":"/","allNodes":false},{"addresses":["192.168.50.100"],"port":80,"protocol":"HTTP","serviceName":"musti-apps:opencloud-wopi-service","ingressName":"musti-apps:opencloud-ingress-m07.eu","hostname":"wopi.musti.uk","path":"/","allNodes":false},{"addresses":["192.168.50.100"],"port":80,"protocol":"HTTP","serviceName":"musti-apps:opencloud-collabora-service","ingressName":"musti-apps:opencloud-ingress-m07.eu","hostname":"collabora.musti.uk","path":"/","allNodes":false}]'
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{"nginx.ingress.kubernetes.io/configuration-snippet":"proxy_set_header X-Forwarded-Proto https;\nproxy_set_header X-Forwarded-Port 443;\nproxy_set_header X-Forwarded-Host $host;\n","nginx.ingress.kubernetes.io/force-ssl-redirect":"true","nginx.ingress.kubernetes.io/proxy-body-size":"10g","nginx.ingress.kubernetes.io/proxy-read-timeout":"3600","nginx.ingress.kubernetes.io/proxy-send-timeout":"3600","nginx.ingress.kubernetes.io/ssl-redirect":"true"},"name":"opencloud-ingress-m07.eu","namespace":"musti-apps"},"spec":{"rules":[{"host":"cloud.m07.eu","http":{"paths":[{"backend":{"service":{"name":"opencloud-external-service","port":{"number":9200}}},"path":"/","pathType":"Prefix"}]}},{"host":"wopi.musti.uk","http":{"paths":[{"backend":{"service":{"name":"opencloud-wopi-service","port":{"number":9300}}},"path":"/","pathType":"Prefix"}]}},{"host":"collabora.musti.uk","http":{"paths":[{"backend":{"service":{"name":"opencloud-collabora-service","port":{"number":9980}}},"path":"/","pathType":"Prefix"}]}}]}}
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_set_header X-Forwarded-Port 443;
+        proxy_set_header X-Forwarded-Host $host;
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/proxy-body-size: 10g
+      nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+      nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    creationTimestamp: "2026-05-09T22:59:21Z"
+    generation: 1
+    name: opencloud-ingress-m07.eu
+    namespace: musti-apps
+    resourceVersion: "208814979"
+    uid: 8b4a0f34-8bbb-4c68-b45d-595da0edc757
+  spec:
+    ingressClassName: traefik
+    rules:
+    - host: cloud.m07.eu
+      http:
+        paths:
+        - backend:
+            service:
+              name: opencloud-external-service
+              port:
+                number: 9200
+          path: /
+          pathType: Prefix
+    - host: wopi.musti.uk
+      http:
+        paths:
+        - backend:
+            service:
+              name: opencloud-wopi-service
+              port:
+                number: 9300
+          path: /
+          pathType: Prefix
+    - host: collabora.musti.uk
+      http:
+        paths:
+        - backend:
+            service:
+              name: opencloud-collabora-service
+              port:
+                number: 9980
+          path: /
+          pathType: Prefix
+  status:
+    loadBalancer:
+      ingress:
+      - ip: 192.168.50.100
+kind: List
+metadata:
+  resourceVersion: ""

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod-test
+  namespace: musti-apps
+  labels:
+    env: test
+    app: nginx
+spec:
+  containers:
+  - name: nginx-web
+    image: nginx
+    ports:
+    - containerPort: 80
+
