@@ -6,3 +6,16 @@
 *secret*
 *password*
 *credential*
+
+# Terraform 
+# Local Terraform working directories
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+*.tfvars.json
+override.tf
+._override.tf
+.terraform.lock.hcl
+terraform-pipeline/musti-apps-full.yaml
