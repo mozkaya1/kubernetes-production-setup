@@ -1,4 +1,4 @@
-USER-SUPPLIED VALUES:
+USER-SUPPLIED VALUES: null
 bootstrapPassword: password
 hostname: rancher.musti.uk
 tls: external

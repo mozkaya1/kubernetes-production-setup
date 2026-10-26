@@ -3,18 +3,18 @@ kind: Service
 metadata:
   annotations:
     field.cattle.io/targetWorkloadIds: '["musti-apps/real-currency-api"]'
-    management.cattle.io/ui-managed: "true"
+    management.cattle.io/ui-managed: 'true'
   name: real-currency-api
   namespace: musti-apps
 spec:
   clusterIP: 10.43.130.84
   clusterIPs:
-  - 10.43.130.84
+    - 10.43.130.84
   ipFamilies:
-  - IPv4
+    - IPv4
   ipFamilyPolicy: SingleStack
   ports:
-  - name: musti-api
-    port: 8080
+    - name: musti-api
+      port: 8080
   selector:
     workload.user.cattle.io/workloadselector: apps.deployment-musti-apps-real-currency-api

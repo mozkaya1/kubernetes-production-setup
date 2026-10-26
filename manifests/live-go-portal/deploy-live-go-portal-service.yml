@@ -8,11 +8,10 @@ metadata:
     field.cattle.io/publicEndpoints: '[{"port":30004,"protocol":"TCP","serviceName":"musti-apps:live-go-portal","allNodes":true}]'
 spec:
   selector:
-    app: live-go-portal  
+    app: live-go-portal
   ports:
     - name: live-go-portal
       port: 8080
       targetPort: 8080
-      nodePort: 30004  ## exposed port to your local PC/server ..
+      nodePort: 30004
   type: NodePort
-
