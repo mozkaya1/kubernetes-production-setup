@@ -5,14 +5,10 @@ metadata:
     deployment.kubernetes.io/revision: "3"
     field.cattle.io/description: 'Go Microservice  - get currency from canlidoviz.com '
     field.cattle.io/publicEndpoints: '[{"port":30003,"protocol":"TCP","serviceName":"musti-apps:real-currency-api-nodeport","allNodes":true}]'
-  creationTimestamp: "2026-02-17T21:03:32Z"
-  generation: 4
   labels:
     workload.user.cattle.io/workloadselector: apps.deployment-musti-apps-real-currency-api
   name: real-currency-api
   namespace: musti-apps
-  resourceVersion: "232758926"
-  uid: 47c6d10f-15fc-4530-a22e-bab77544105e
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
@@ -36,7 +32,6 @@ spec:
       name: real-currency-api
       namespace: musti-apps
     spec:
-      affinity: {}
       containers:
       - image: ozkaya84/real-currency
         imagePullPolicy: Always
@@ -45,7 +40,6 @@ spec:
         - containerPort: 8080
           name: musti-api
           protocol: TCP
-        resources: {}
         securityContext:
           allowPrivilegeEscalation: false
           privileged: false
@@ -56,24 +50,4 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
-      securityContext: {}
       terminationGracePeriodSeconds: 30
-status:
-  availableReplicas: 1
-  conditions:
-  - lastTransitionTime: "2026-03-26T21:48:53Z"
-    lastUpdateTime: "2026-03-26T21:48:53Z"
-    message: Deployment has minimum availability.
-    reason: MinimumReplicasAvailable
-    status: "True"
-    type: Available
-  - lastTransitionTime: "2026-02-17T21:03:32Z"
-    lastUpdateTime: "2026-07-14T11:28:52Z"
-    message: ReplicaSet "real-currency-api-f74bb794d" has successfully progressed.
-    reason: NewReplicaSetAvailable
-    status: "True"
-    type: Progressing
-  observedGeneration: 4
-  readyReplicas: 1
-  replicas: 1
-  updatedReplicas: 1
