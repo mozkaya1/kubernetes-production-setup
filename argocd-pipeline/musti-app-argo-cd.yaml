@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: musti-app-argo
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/mozkaya1/kubernetes-production-setup.git
+    targetRevision: HEAD
+    path: manifests/musti-app
+  
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: musti-apps
+
+  syncPolicy:
+    automated:
+
+      selfHeal: true
+      prune: true
+
+    syncOptions:
+      - ServerSideApply=true
+#      - CreateNamespace=true
+    
+
+
