@@ -2,9 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    deployment.kubernetes.io/revision: "31"
     field.cattle.io/publicEndpoints: '[{"port":30001,"protocol":"TCP","serviceName":"musti-apps:meiraaccessories-nodeport","allNodes":true},{"addresses":["192.168.50.100"],"port":80,"protocol":"HTTP","serviceName":"musti-apps:meiraaccessories","ingressName":"musti-apps:meira","hostname":"*.meiraaccessories.com","path":"/","allNodes":false}]'
-  generation: 69
   labels:
     workload.user.cattle.io/workloadselector: apps.deployment-musti-apps-meiraaccessories
   name: meiraaccessories
