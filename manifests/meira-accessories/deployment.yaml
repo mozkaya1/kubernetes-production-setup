@@ -33,14 +33,6 @@ spec:
       - args:
         - --default-authentication-plugin=mysql_native_password
         env:
-        - name: MYSQL_ROOT_PASSWORD
-          value: "****"
-        - name: MYSQL_USER
-          value: *****
-        - name: MYSQL_PASSWORD
-          value: *****
-        - name: MYSQL_DATABASE
-          value: *****
         image: mariadb:11.7.2
         imagePullPolicy: Always
         name: mariadb
@@ -64,14 +56,8 @@ spec:
       - env:
         - name: WORDPRESS_DB_HOST
           value: 127.0.0.1
-        - name: WORDPRESS_DB_USER
-          value: *****
-        - name: WORDPRESS_DB_PASSWORD
-          value: *****
-        - name: WORDPRESS_DB_NAME
-          value: *****
         - name: WORDPRESS_DEBUG
-          value: "True"
+          value: "False"
         image: ozkaya84/meira-wordpress:latest
         imagePullPolicy: Always
         name: wordpress
