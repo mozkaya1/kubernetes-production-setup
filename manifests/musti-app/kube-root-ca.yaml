@@ -33,7 +33,5 @@ items:
       creationTimestamp: '2024-10-28T16:12:26Z'
       name: kube-root-ca.crt
       namespace: musti-apps
-      resourceVersion: '338353'
-      uid: 35f505fb-febf-4058-b11a-4c31db042789
 kind: List
 metadata: {}
