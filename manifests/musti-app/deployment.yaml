@@ -29,7 +29,7 @@ spec:
       namespace: musti-apps
     spec:
       containers:
-        - image: ozkaya84/drulkuozkaya
+        - image: ozkaya84/drulkuozkaya:2
           imagePullPolicy: Always
           name: drulkuozkaya
           ports:
