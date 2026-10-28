@@ -8,7 +8,7 @@ resource "kubernetes_manifest" "deployment_musti_apps_live_go_portal" {
     "kind" = "Deployment"
     "metadata" = {
       "annotations" = {
-        "deployment.kubernetes.io/revision" = "5"
+
         "field.cattle.io/description" = "Live Go Portal - Main application"
         "field.cattle.io/publicEndpoints" = "[{\"port\":30004,\"protocol\":\"TCP\",\"serviceName\":\"musti-apps:live-go-portal\",\"allNodes\":true}]"
         "kubectl.kubernetes.io/last-applied-configuration" = <<-EOT
@@ -38,7 +38,8 @@ resource "kubernetes_manifest" "deployment_musti_apps_live_go_portal" {
       "template" = {
         "metadata" = {
           "annotations" = {
-            "kubectl.kubernetes.io/restartedAt" = "2026-02-24T20:37:37+01:00"
+        "cattle.io/timestamp" = ""
+        "kubectl.kubernetes.io/restartedAt" = ""
           }
           "labels" = {
             "app" = "live-go-portal"
@@ -107,7 +108,6 @@ resource "kubernetes_manifest" "deployment_musti_apps_meiraaccessories" {
     "kind" = "Deployment"
     "metadata" = {
       "annotations" = {
-        "deployment.kubernetes.io/revision" = "38"
         "field.cattle.io/publicEndpoints" = "[{\"addresses\":[\"192.168.50.100\"],\"port\":80,\"protocol\":\"HTTP\",\"serviceName\":\"musti-apps:meiraaccessories\",\"ingressName\":\"musti-apps:meira\",\"hostname\":\"*.meiraaccessories.com\",\"path\":\"/\",\"allNodes\":false},{\"port\":30001,\"protocol\":\"TCP\",\"serviceName\":\"musti-apps:meiraaccessories-nodeport\",\"allNodes\":true}]"
       }
       "labels" = {
@@ -146,28 +146,6 @@ resource "kubernetes_manifest" "deployment_musti_apps_meiraaccessories" {
         "spec" = {
           "containers" = [
             {
-              "env" = [
-                {
-                  "name" = "WORDPRESS_DB_HOST"
-                  "value" = "127.0.0.1"
-                },
-                {
-                  "name" = "WORDPRESS_DB_USER"
-                  "value" = "meira_user"
-                },
-                {
-                  "name" = "WORDPRESS_DB_PASSWORD"
-                  "value" = "Kimi1984!"
-                },
-                {
-                  "name" = "WORDPRESS_DB_NAME"
-                  "value" = "meira_db"
-                },
-                {
-                  "name" = "WORDPRESS_DEBUG"
-                  "value" = "True"
-                },
-              ]
               "image" = "ozkaya84/meira-wordpress:latest"
               "imagePullPolicy" = "Always"
               "name" = "wordpress"
@@ -207,24 +185,6 @@ resource "kubernetes_manifest" "deployment_musti_apps_meiraaccessories" {
             {
               "args" = [
                 "--default-authentication-plugin=mysql_native_password",
-              ]
-              "env" = [
-                {
-                  "name" = "MYSQL_ROOT_PASSWORD"
-                  "value" = "0040"
-                },
-                {
-                  "name" = "MYSQL_USER"
-                  "value" = "meira_user"
-                },
-                {
-                  "name" = "MYSQL_PASSWORD"
-                  "value" = "Kimi1984!"
-                },
-                {
-                  "name" = "MYSQL_DATABASE"
-                  "value" = "meira_db"
-                },
               ]
               "image" = "mariadb:11.7.2"
               "imagePullPolicy" = "Always"

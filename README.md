@@ -1,75 +1,118 @@
-# Kubernetes Cluster Production Setup.
+# 🚀 Production-Ready Kubernetes & GitOps Infrastructure Setup
 
-This repository contains production-ready Kubernetes configurations for a multi-application environment running on Rancher.
+![Kubernetes](https://img.shields.io/badge/Kubernetes-v1.28%2B-blue?style=flat-square&logo=kubernetes)
+![Terraform](https://img.shields.io/badge/Terraform-Infrastructure%20as%20Code-purple?style=flat-square&logo=terraform)
+![ArgoCD](https://img.shields.io/badge/ArgoCD-GitOps-orange?style=flat-square&logo=argocd)
+![Rancher](https://img.shields.io/badge/Rancher-2.9.3-lightblue?style=flat-square&logo=rancher)
+![Golang](https://img.shields.io/badge/Golang-Microservices-00ADD8?style=flat-square&logo=go)
 
-##  Applications Deployed
+This repository demonstrates an enterprise-grade, production-ready microservices architecture orchestrated on **Kubernetes (Rancher/K3s)**, provisioned via **Terraform (IaC)**, and continuously deployed using **ArgoCD (GitOps)**.
 
-### 1. Meira Accessories
-- **Type:** Web Application
-- **Services:** Main service + NodePort for external access
-- **Database:** MariaDB integration
-- **Features:** Load balancing, external accessibility
+---
 
-### 2. Musti Deployment  
-- **Type:** Web Application
-- **Services:** ClusterIP + NodePort (port 30000)
-- **Features:** Internal and external access patterns
+## 🏗️ Architecture & DevOps Workflow
 
-### 3. Weather API
-- **Type:** API Service (Go application)
-- **Port:** 8080
-- **Services:** ClusterIP + NodePort (port 30002)
-- **Features:** REST API with health checks
-
-### 4. Database Layer
-- **MariaDB:** Relational database with dedicated service
-
-### 5. Monitoring 
-- **Prometheus** -- Data collecting
-- **Grafana** -- Graphs 
-
-## Architecture
-
-Load Balancer (Traefik)
-- ├── Meira Accessories (port 30001)
-- ├── Musti App (port 30000)
-- └── Weather API (port 30002)
-- └── MariaDB Database
-
-##  Technical Stack
-
-- **Orchestration:** Kubernetes v1.28+
-- **Management:** Rancher 2.9.3
-- **Ingress:** Traefik
-- **Service Mesh:** Built-in Kubernetes networking
-- **Monitoring:** Resource limits and health checks
-
-## Repository Structure
-
-- kubernetes-production-setup/
-- ├── manifests/ # Raw Kubernetes YAML files
-- ├── helm-charts/ # Helm charts for each application
-- ├── documentation/ # Architecture and runbooks
-- └── scripts/ # Deployment and maintenance scripts
-
-##  Quick Start
-
-```bash
-# Deploy all applications
-kubectl apply -f manifests/
-
-# Or use Helm charts
-helm install meira-accessory ./helm-charts/web-app
-helm install weather-api ./helm-charts/go-api-app
-
-# Monitoring -- Docker Compose
-cd ./manifests/monitoring/
-docker-compose up 
-
+```text
+[ Git Repository ] 
+       │ (Push/PR)
+       ▼
+[ ArgoCD (GitOps) ] ──(Sync)──► [ Kubernetes Cluster (Rancher / K3s) ]
+                                      │
+        ┌─────────────────────────────┼─────────────────────────────┐
+        ▼                             ▼                             ▼
+[ Traefik Ingress ]          [ Go Microservices ]          [ Databases ]
+  ├── Live Portal              ├── Weather API               ├── MariaDB
+  ├── Meira Accessories        ├── Currency API              └── PostgreSQL
+  └── Musti App                └── Real-time WebSocket
 ```
 
-## Rancher 
-![Rancher](./rancher.png)
+---
 
-## Monitoring - Grafana
-![grafana](./monitoring.png) 
+## 📦 Deployed Microservices & Workloads
+
+1. **Live Go Portal**
+   - **Type:** Real-time dashboard frontend with WebSocket communication streaming live data.
+2. **Weather API**
+   - **Type:** Go REST API providing real-time weather data and health checks.
+3. **Real Currency API**
+   - **Type:** Multi-asset currency JSON data provider built in Go.
+4. **Meira Accessories**
+   - **Type:** E-commerce web application integrated with a dedicated **MariaDB** database layer.
+5. **Musti App**
+   - **Type:** Web application accessible internally via ClusterIP and externally via NodePort/Ingress.
+6. **Observability Stack**
+   - **Prometheus:** Metrics collection and resource monitoring.
+   - **Grafana:** Visual dashboards for cluster performance and health tracking.
+
+---
+
+## 🛠️ Technical Stack
+
+- **Orchestration & Management:** Kubernetes v1.28+, Rancher 2.9.3, K3s
+- **Infrastructure as Code (IaC):** Terraform
+- **Continuous Delivery & GitOps:** ArgoCD
+- **Networking & Ingress:** Traefik Ingress Controller
+- **Backend Services:** Golang (REST APIs, WebSockets), Python, Bash
+- **Databases:** MariaDB, PostgreSQL
+- **Monitoring:** Prometheus, Grafana
+
+---
+
+## 📂 Repository Structure
+
+```text
+kubernetes-production-setup/
+├── terraform/          # Infrastructure provisioning scripts & modules
+├── argocd/             # GitOps application manifests and sync policies
+├── manifests/          # Raw Kubernetes YAML manifests
+├── helm-charts/        # Reusable Helm charts for microservices
+├── documentation/      # Architecture blueprints and runbooks
+└── scripts/            # Deployment, automation, and maintenance scripts
+```
+
+---
+
+## 🚀 Quick Start & Deployment
+
+### 1. Provision Infrastructure (Terraform)
+```bash
+cd terraform/
+terraform init
+terraform apply
+```
+
+### 2. GitOps Continuous Deployment (ArgoCD)
+```bash
+# Apply ArgoCD application definitions to manage cluster state
+kubectl apply -f argocd/
+```
+
+### 3. Manual Deployment (Alternative)
+```bash
+# Deploy raw manifests
+kubectl apply -f manifests/
+
+# Or deploy via Helm charts
+helm install meira-accessory ./helm-charts/web-app
+helm install weather-api ./helm-charts/go-api-app
+```
+
+---
+
+## 📊 Visual Dashboards
+
+### Rancher Cluster Management
+![Rancher](./static/rancher.png)
+
+### Grafana Observability
+![Grafana](./static/monitoring.png)
+
+### ArgoCD Continuous Deployment
+![ArgoCD](./static/argocd.png)
+
+### Kubernetes PODS 
+![Pods](./static/pods.png)
+
+### Kubernetes Service 
+![Pods](./static/services.png)
+
