@@ -102,13 +102,12 @@ resource "kubernetes_manifest" "deployment_musti_apps_meiraaccessories" {
   field_manager {
     force_conflicts = true
   }
-
   manifest = {
     "apiVersion" = "apps/v1"
     "kind" = "Deployment"
     "metadata" = {
       "annotations" = {
-        "field.cattle.io/publicEndpoints" = "[{\"addresses\":[\"192.168.50.100\"],\"port\":80,\"protocol\":\"HTTP\",\"serviceName\":\"musti-apps:meiraaccessories\",\"ingressName\":\"musti-apps:meira\",\"hostname\":\"*.meiraaccessories.com\",\"path\":\"/\",\"allNodes\":false},{\"port\":30001,\"protocol\":\"TCP\",\"serviceName\":\"musti-apps:meiraaccessories-nodeport\",\"allNodes\":true}]"
+        "field.cattle.io/publicEndpoints" = "[{\"port\":30001,\"protocol\":\"TCP\",\"serviceName\":\"musti-apps:meiraaccessories-nodeport\",\"allNodes\":true},{\"addresses\":[\"192.168.50.100\"],\"port\":80,\"protocol\":\"HTTP\",\"serviceName\":\"musti-apps:meiraaccessories\",\"ingressName\":\"musti-apps:meira\",\"hostname\":\"*.meiraaccessories.com\",\"path\":\"/\",\"allNodes\":false}]"
       }
       "labels" = {
         "workload.user.cattle.io/workloadselector" = "apps.deployment-musti-apps-meiraaccessories"
@@ -136,7 +135,6 @@ resource "kubernetes_manifest" "deployment_musti_apps_meiraaccessories" {
         "metadata" = {
           "annotations" = {
             "cattle.io/timestamp" = "2025-03-25T16:59:10Z"
-            "kubectl.kubernetes.io/restartedAt" = "2026-05-12T16:26:12+02:00"
           }
           "labels" = {
             "workload.user.cattle.io/workloadselector" = "apps.deployment-musti-apps-meiraaccessories"
@@ -146,45 +144,20 @@ resource "kubernetes_manifest" "deployment_musti_apps_meiraaccessories" {
         "spec" = {
           "containers" = [
             {
-              "image" = "ozkaya84/meira-wordpress:latest"
-              "imagePullPolicy" = "Always"
-              "name" = "wordpress"
-              "ports" = [
-                {
-                  "containerPort" = 80
-                  "name" = "wordpress"
-                  "protocol" = "TCP"
-                },
-              ]
-              "resources" = {
-                "limits" = {
-                  "cpu" = "500m"
-                  "memory" = "954Mi"
-                }
-                "requests" = {
-                  "cpu" = "200m"
-                  "memory" = "512Mi"
-                }
-              }
-              "securityContext" = {
-                "allowPrivilegeEscalation" = false
-                "privileged" = false
-                "readOnlyRootFilesystem" = false
-                "runAsNonRoot" = false
-              }
-              "terminationMessagePath" = "/dev/termination-log"
-              "terminationMessagePolicy" = "File"
-              "volumeMounts" = [
-                {
-                  "mountPath" = "/var/www/html"
-                  "name" = "vol-qrzml"
-                  "subPath" = "meiraaccessories/content_dir"
-                },
-              ]
-            },
-            {
               "args" = [
                 "--default-authentication-plugin=mysql_native_password",
+              ]
+              "envFrom" = [
+                {
+                  "configMapRef" = {
+                    "name" = "meira-config"
+                  }
+                },
+                {
+                  "secretRef" = {
+                    "name" = "meira-secret"
+                  }
+                },
               ]
               "image" = "mariadb:11.7.2"
               "imagePullPolicy" = "Always"
@@ -196,16 +169,7 @@ resource "kubernetes_manifest" "deployment_musti_apps_meiraaccessories" {
                   "protocol" = "TCP"
                 },
               ]
-              "resources" = {
-                "limits" = {
-                  "cpu" = "500m"
-                  "memory" = "1G"
-                }
-                "requests" = {
-                  "cpu" = "200m"
-                  "memory" = "256Mi"
-                }
-              }
+              "resources" = {}
               "securityContext" = {
                 "allowPrivilegeEscalation" = true
                 "capabilities" = {}
@@ -220,6 +184,46 @@ resource "kubernetes_manifest" "deployment_musti_apps_meiraaccessories" {
                   "mountPath" = "/var/lib/mysql"
                   "name" = "vol-qrzml"
                   "subPath" = "meiraaccessories/db_dir"
+                },
+              ]
+            },
+            {
+              "envFrom" = [
+                {
+                  "configMapRef" = {
+                    "name" = "meira-config"
+                  }
+                },
+                {
+                  "secretRef" = {
+                    "name" = "meira-secret"
+                  }
+                },
+              ]
+              "image" = "ozkaya84/meira-wordpress:latest"
+              "imagePullPolicy" = "Always"
+              "name" = "wordpress"
+              "ports" = [
+                {
+                  "containerPort" = 80
+                  "name" = "wordpress"
+                  "protocol" = "TCP"
+                },
+              ]
+              "resources" = {}
+              "securityContext" = {
+                "allowPrivilegeEscalation" = false
+                "privileged" = false
+                "readOnlyRootFilesystem" = false
+                "runAsNonRoot" = false
+              }
+              "terminationMessagePath" = "/dev/termination-log"
+              "terminationMessagePolicy" = "File"
+              "volumeMounts" = [
+                {
+                  "mountPath" = "/var/www/html"
+                  "name" = "vol-qrzml"
+                  "subPath" = "meiraaccessories/content_dir"
                 },
               ]
             },
