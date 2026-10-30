@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: meira-config
+  namespace: default
+data:
+  MYSQL_USER: "meira_user"
+  MYSQL_DATABASE: "meira_db"
+  WORDPRESS_DB_HOST: "127.0.0.1"
+  WORDPRESS_DB_NAME: "meira_db"
+  WORDPRESS_DB_USER: "meira_user"
+  WORDPRESS_DEBUG: "False"

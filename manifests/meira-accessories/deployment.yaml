@@ -30,7 +30,12 @@ spec:
       containers:
       - args:
         - --default-authentication-plugin=mysql_native_password
-        env:
+        envFrom:
+          - configMapRef:
+              name: meira-config
+          - secretRef:
+              name: meira-secret
+
         image: mariadb:11.7.2
         imagePullPolicy: Always
         name: mariadb
@@ -51,11 +56,11 @@ spec:
         - mountPath: /var/lib/mysql
           name: vol-qrzml
           subPath: meiraaccessories/db_dir
-      - env:
-        - name: WORDPRESS_DB_HOST
-          value: 127.0.0.1
-        - name: WORDPRESS_DEBUG
-          value: "False"
+        envFrom:
+          - configMapRef:
+              name: meira-config
+          - secretRef:
+              name: meira-secret
         image: ozkaya84/meira-wordpress:latest
         imagePullPolicy: Always
         name: wordpress
