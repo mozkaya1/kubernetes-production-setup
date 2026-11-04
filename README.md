@@ -5,7 +5,7 @@
 ![ArgoCD](https://img.shields.io/badge/ArgoCD-GitOps-orange?style=flat-square&logo=argocd)
 ![Rancher](https://img.shields.io/badge/Rancher-2.9.3-lightblue?style=flat-square&logo=rancher)
 ![Golang](https://img.shields.io/badge/Golang-Microservices-00ADD8?style=flat-square&logo=go)
-
+![ELK Stack](https://img.shields.io/badge/ELK%20Stack-v8.11.3-005571?style=flat-square&logo=elastic&logoColor=white)
 This repository demonstrates an enterprise-grade, production-ready microservices architecture orchestrated on **Kubernetes (Rancher/K3s)**, provisioned via **Terraform (IaC)**, and continuously deployed using **ArgoCD (GitOps)**.
 
 ---
@@ -43,6 +43,7 @@ This repository demonstrates an enterprise-grade, production-ready microservices
 6. **Observability Stack**
    - **Prometheus:** Metrics collection and resource monitoring.
    - **Grafana:** Visual dashboards for cluster performance and health tracking.
+   - **ELK:** Log streaming, storing, Indexing, Visualazation with Kibana.
 
 ---
 
@@ -54,7 +55,7 @@ This repository demonstrates an enterprise-grade, production-ready microservices
 - **Networking & Ingress:** Traefik Ingress Controller
 - **Backend Services:** Golang (REST APIs, WebSockets), Python, Bash
 - **Databases:** MariaDB, PostgreSQL
-- **Monitoring:** Prometheus, Grafana
+- **Monitoring:** Prometheus, Grafana, ELK Stack
 
 ---
 
@@ -64,6 +65,7 @@ This repository demonstrates an enterprise-grade, production-ready microservices
 kubernetes-production-setup/
 ├── terraform/          # Infrastructure provisioning scripts & modules
 ├── argocd/             # GitOps application manifests and sync policies
+├── ELK-stack/          # ELK stack integration / Filebeat
 ├── manifests/          # Raw Kubernetes YAML manifests
 ├── helm-charts/        # Reusable Helm charts for microservices
 ├── documentation/      # Architecture blueprints and runbooks
@@ -92,6 +94,7 @@ kubectl apply -f argocd/
 # Deploy raw manifests
 kubectl apply -f manifests/
 
+
 # Or deploy via Helm charts
 helm install meira-accessory ./helm-charts/web-app
 helm install weather-api ./helm-charts/go-api-app
@@ -109,6 +112,10 @@ helm install weather-api ./helm-charts/go-api-app
 
 ### ArgoCD Continuous Deployment
 ![ArgoCD](./static/argocd.png)
+
+### ELK Stack
+![ELK1](./static/elk-kibana.png)
+![ELK2](./static/elk-log.png)
 
 ### Kubernetes PODS 
 ![Pods](./static/pods.png)
