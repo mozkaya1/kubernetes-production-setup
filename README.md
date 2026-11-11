@@ -107,19 +107,26 @@ helm install weather-api ./helm-charts/go-api-app
 ### Rancher Cluster Management
 ![Rancher](./static/rancher.png)
 
-### Grafana Observability
-![Grafana](./static/monitoring.png)
-
 ### ArgoCD Continuous Deployment
-![ArgoCD](./static/argocd.png)
+![ArgoCD](./static/argoCD-pipe.png)
+![ArgoCD](./static/argoCD-elk.png)
+
+### Grafana Observability
+![Grafana](./static/grafana-dashboards.png)
+![Grafana](./static/grafana-kubelet.png)
 
 ### ELK Stack
 ![ELK1](./static/elk-kibana.png)
 ![ELK2](./static/elk-log.png)
+
+### Prometheus Metrics
+![Prometheus](./static/prometheus-metric.png)
+![Prometheus](./static/prometheus-target-service.png)
 
 ### Kubernetes PODS 
 ![Pods](./static/pods.png)
 
 ### Kubernetes Service 
 ![Pods](./static/services.png)
+
 
